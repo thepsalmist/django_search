@@ -1,3 +1,17 @@
 from django.shortcuts import render
+from .models import Journal
 
-# Create your views here.
+
+def BootstrapFilterView(request):
+    qs = Journal.objects.all()
+    title_contains_query = request.GET.get('title_contains')
+    title_exact_query = request.GET.get('title_exact')
+    title_or_author_query = request.GET.get('title_or_author')
+    context = {
+        'queryset': qs
+    }
+
+    if title_contains_query != '' and title_contains_query is not None:
+        qs = qs.filter(title__icontains=title_contains_query)
+
+    return render(request, 'core/bootstrap_form.html', context)

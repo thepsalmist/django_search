@@ -115,7 +115,9 @@
                     <label for="inputState">Category</label>
                     <select id="inputState" class="form-control" name="category">
                         <option selected>Choose...</option>
-                        <option>...</option>
+                        {% for category in categories %}
+                        <option value="{{category}}">{{category}}</option>
+                        {%endfor%}
                     </select>
                 </div>
             </div>
